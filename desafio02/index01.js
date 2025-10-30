@@ -1,5 +1,4 @@
 // Solução usando o padrão Adapter (baseada no problema em `problemAdapter.js`)
-// Objetivo: adaptar a API moderna para a interface esperada pelo PaymentProcessor
 
 class LegacyPaymentSystem {
 	makePayment(amount) {
@@ -8,13 +7,11 @@ class LegacyPaymentSystem {
 }
 
 class ModernPaymentAPI {
-	// Essa API espera valor em centavos
 	process(amountInCents) {
 		console.log(`Pagamento de R$${amountInCents / 100} via API moderna.`);
 	}
 }
 
-// PaymentProcessor espera um objeto com método makePayment(amount)
 class PaymentProcessor {
 	constructor(system) {
 		this.system = system;
@@ -25,15 +22,12 @@ class PaymentProcessor {
 	}
 }
 
-// Adapter: torna ModernPaymentAPI compatível com a interface esperada
 class ModernPaymentAdapter {
 	constructor(modernService) {
 		this.modernService = modernService;
 	}
 
-	// método esperado pelo PaymentProcessor
 	makePayment(amount) {
-		// converte reais para centavos e delega para a API moderna
 		const cents = Math.round(amount * 100);
 		this.modernService.process(cents);
 	}

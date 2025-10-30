@@ -1,5 +1,4 @@
 // Solução usando o padrão Decorator (baseada no problema em `problemDecorator.js`)
-// Objetivo: permitir adicionar comportamentos ao Message sem modificar sua classe
 
 class Message {
 	constructor(text) {
@@ -11,7 +10,6 @@ class Message {
 	}
 }
 
-// Decorator base que delega para o componente original
 class MessageDecorator {
 	constructor(message) {
 		this.message = message;
@@ -22,7 +20,6 @@ class MessageDecorator {
 	}
 }
 
-// Decorator concreto: capitaliza a primeira letra de cada frase
 class CapitalizeDecorator extends MessageDecorator {
 	getText() {
 		const original = super.getText();
@@ -38,7 +35,6 @@ class CapitalizeDecorator extends MessageDecorator {
 	}
 }
 
-// Decorator concreto: filtra palavrões/words ofensivas simples
 class ProfanityFilterDecorator extends MessageDecorator {
 	constructor(message, replacements = {}) {
 		super(message);
@@ -57,7 +53,6 @@ class ProfanityFilterDecorator extends MessageDecorator {
 	}
 }
 
-// Decorator concreto: enfatiza adicionando ponto de exclamação
 class EmphasizeDecorator extends MessageDecorator {
 	getText() {
 		const txt = super.getText();
@@ -71,7 +66,6 @@ class EmphasizeDecorator extends MessageDecorator {
 const msg = new Message('hoje o dia está horrível');
 console.log('Original:', msg.getText());
 
-// Empilha decoradores: primeiro filtra, depois capitaliza, depois enfatiza
 const decorated = new EmphasizeDecorator(
 	new CapitalizeDecorator(
 		new ProfanityFilterDecorator(msg, { horrível: 'horrível (ruim)' })

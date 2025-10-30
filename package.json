@@ -12,6 +12,7 @@
     "problem_composite": "node desafio02/problemComposite.js",
     "problem_decorator": "node desafio02/problemDecorator.js"
   },
-  "author": "Ugioni",
+  "author": "Taylor",
   "license": "MIT"
+
 }
